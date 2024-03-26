@@ -1,0 +1,500 @@
+---
+title: "Insects as food in Aotearoa New Zealand"
+author: "Neil Birrell"
+format: 
+  revealjs:
+    theme: serif
+    logo: /media/huhu_line_transparent.png
+    css: /css/logo.css
+---
+
+```{r libraries}
+#| label: load-packages
+#| include: false
+
+library(tidyverse)
+library(maps)
+library(mapdata)
+library(ggplot2)
+library(ggmap)
+library(ggrepel)
+library(tidyverse)
+library(RColorBrewer)
+library(leaflet)
+library(leaflet.providers)
+```
+
+```{r dataframes}
+#| echo: false
+
+#Dataframes
+
+#environmental impact
+df_enviro_impact <- tibble(
+  Animal = c("beef", "beef", "milk", "milk", "pork", "pork", "chicken", "chicken", "mealworms", "mealworms"),
+  min_max = c("a", "b", "a", "b", "a", "b", "a", "b", "meal_1", "meal_2"),
+  GHG = c(75, 170, 24, 48, 21, 53, 18, 36, 2.65, 0),
+  Land_use = c(144, 258, 33, 59, 47, 64, 42, 52, 3.56, 0),
+  Energy_use = c(177, 273, 37, 144, 95, 236, 80, 152, 33.68, 0)
+)
+
+df_enviro_impact_long <- df_enviro_impact %>%
+  pivot_longer(cols = c(GHG, Land_use, Energy_use), names_to = "Metric", values_to = "Value")
+
+enviro_orderx <- c("mealworms", "chicken", "milk", "pork", "beef")
+
+#metabolomics fieldsites
+df_metab_fieldsites <- data.frame(
+  fieldsite = c("Riverhead Forest, Auckland", "Kaingaroa Forest, Rotorua", "Mangaroa Valley, Wellington", "Cheneys Forest, Christchurch", "Flagstaff Forest, Dunedin", "Seabush, Invercargill"),
+  latitude = c(-36.710279, -38.335292, -41.132062, -43.431166, -45.82842, -46.429568),
+  longitude = c(174.557322, 176.388937, 175.109406, 172.669852, 170.449849, 168.431585)
+)
+
+
+#graphs for environmental impacts
+p1 <- df_enviro_impact_long %>%
+  filter(Metric == "GHG") %>% 
+  ggplot(aes(x = Animal, y = Value, fill = min_max)) + 
+  geom_col(position = "dodge") +
+  labs(title = "Greenhouse gas emissions (kg CO2-eq/kg protein)",
+       x = "Animal", y = "kg CO2-eq/kg protein") + 
+  scale_x_discrete(limits = enviro_orderx) +
+  theme_classic() +
+  theme(legend.position = "none")
+
+p2 <- df_enviro_impact_long %>%
+  filter(Metric == "Land_use") %>% 
+  ggplot(aes(x = Animal, y = Value, fill = min_max)) + 
+  geom_col(position = "dodge") +
+  labs(title = "Land use (m2/kg protein)",
+       x = "Animal", y = "m2/kg protein") + 
+  scale_x_discrete(limits = enviro_orderx) +
+  theme_classic() +
+  theme(legend.position = "none")
+
+p3 <- df_enviro_impact_long %>%
+  filter(Metric == "Energy_use") %>% 
+  ggplot(aes(x = Animal, y = Value, fill = min_max)) + 
+  geom_col(position = "dodge") +
+  labs(title = "Energy use (MJ/kg protein)",
+       x = "Animal", y = "MJ/kg protein") + 
+  scale_x_discrete(limits = enviro_orderx) +
+  theme_classic() +
+  theme(legend.position = "none")
+
+```
+
+# Background
+
+## Population Growth
+
+::: columns
+::: {.column width="45%"}
+-   By 2050, global population will increase to 9.7 billion (U.N., 2019)
+-   Estimated increase in protein consumption between 32 - 43% (Henchion et al., 2017)
+:::
+
+::: {.column width="55%"}
+![](media/fao_population.png){.r-stretch}
+:::
+:::
+
+## Insects as Food
+
+-   FAO suggests insect protein be used to meet demand
+-   Many perceived advantages over traditional livestock
+
+::: notes
+-   High feed conversion efficiency
+-   Incredibly diverse order of animals
+-   Grow in high densities
+:::
+
+## Green House Gas Emissions
+
+```{r ghg}
+p1
+```
+
+::: aside
+Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
+:::
+
+## Land Use
+
+```{r landuse}
+p2
+```
+
+::: aside
+Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
+:::
+
+## Energy Use
+
+```{r energyuse}
+p3
+```
+
+::: aside
+Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
+:::
+
+## Insects as Food
+
+::: columns
+::: {.column width="45%"}
+-   Several hundred million (van Huis et al., 2013)
+-   `>`1500 species of insects (van Itterbeeck & Pelozuelo, 2022)
+:::
+
+::: {.column .r-stretch width="55%"}
+![](media/intro_insects_country.jpg)
+:::
+:::
+
+::: notes
+-   Little is known of the species consumed in New Zealand
+:::
+
+## Overview of the thesis
+
+![](media/thesis_overview.png){.center}
+
+::: notes
+-   I sought to address this
+-   started off by looking at the social context in which insects have been used
+-   prior to investigating the biology of an important endemic edible insect species
+:::
+
+# Chapter 2: A review of insects as food in Aotearoa New Zealand
+
+## Edible insect catalogue
+
+-   Identified species with traditional and contemporary uses
+-   Analysed social and legislative landscape
+-   recorded companies marketing edible insect products
+
+## Findings
+
+-   Identified 21 insects species
+-   at least 10 endemic/native species:
+
+::: columns
+::: {.column style="width: 50%; font-size: 70%;"}
+-   *Prionoplus reticularis*, huhu grub
+-   *Aenetus virescens*, pūriri moth
+-   *Pyronota festiva*, mānuka beetle
+-   *Costelytra zealandica* / *Odontria zealandica*, tūtaeruru/grass grub
+-   *Locusta migratoria*, migratory locust
+:::
+
+::: {.column style="width: 50%; font-size: 70%;"}
+-   *Teleogryllus commodus*, black field cricket
+-   *Agrius convolvuli* kumara moth/hīhue
+-   *Kikihia muta*, kihikihi kai
+-   Tortricidae family - species unknown tīkopa/leaf rollers
+-   *Archichauliodes diversus*, puene
+:::
+:::
+
+## Findings
+
+-   In last 10 years:
+    -   Eight companies have sold edible insects/insect-based products
+    -   Only two are still trading/marketing products
+
+## Findings
+
+![](media/c_2/companies_marketing_top_words.png){width="1200"}
+
+::: notes
+-   Words used in marketing and mission statements of these 8 companies
+-   cricket, protein, flour used a lot (reflects the products they were selling)
+-   words associated with sustainability were also used frequently
+:::
+
+## Findings
+
+![](media/c_2/companies_marketing_companies_number.png){width="1200"}
+
+::: notes
+-   when we compare this to a count of companies that used these words
+-   we see that sustainable and protein are used by every single company
+-   However there is little evidence on companies websites to suggest that they are actually sustainable
+-   most (but not all) relied on ingredients imported from Thailand or Canada which would likely impact enviro footprint
+-   this may lead to mistrust with consumers if found out
+:::
+
+# Chapter 3: The use, perception, and existing knowledge of insects as food in Aotearoa New Zealand
+
+## Knowledge and use of insects as food
+
+-   620 participants
+-   367 had eaten insects (59.2%)
+-   471 participants were likely to eat in future (76.0%)
+-   498 people could name one or more species (80.3%)
+-   333 people named the huhu grub (53.7%)
+-   298 people named crickets (48.1%)
+
+::: notes
+This reflects the widely known status of huhu grubs in New Zealand The international and local recognition of crickets (e.g. cricket flour)
+:::
+
+## Factors which influence likelihood of eating insects (logistic regression)
+
+-   Factors influencing future likelihood:
+    -   Prior experience
+    -   Knowledge
+    -   Food neophobia score
+
+::: notes
+-   Prior experience and increasing knowledge of edible species were significant positive factors
+-   Food neophobia score was a significant negative factor
+:::
+
+## Unconscious Bias
+
+![](media/c_3/sent_analysis.png){width="1200"}
+
+::: notes
+-   Asked people to list the first words or phrases that came to mind when they saw a particular menu ingredient (e.g. beef, tofu, silkworm pupae)
+-   Despite participants overall willingness to eat insects, insect ingredients had significantly lower sentiment scores in the words used to describe them.
+-   becomes interesting when looking at individual ingredients
+-   Cricket flour is actually has very positive sentiment scores
+-   huhu grubs are broadly comparable to lamb and tofu
+-   words with "worm" or "pupae" in them ellicit greater disgust
+:::
+
+## Words associated with cricket flour
+
+::: columns
+::: {.column style="width: 50%; font-size: 70%;"}
+-   Positive
+    -   "curious"
+    -   "interesting"
+-   Environmentally friendly
+    -   "green"
+    -   "environmental"
+    -   "alternative"
+:::
+
+::: {.column style="width: 50%; font-size: 70%;"}
+-   Nutritious
+    -   "high protein"
+    -   "gluten free"
+-   Culinary applications
+    -   "bread"
+    -   "pancake"
+    -   "tortilla"
+:::
+:::
+
+## Words associated with huhu grubs
+
+::: columns
+::: {.column style="width: 50%; font-size: 70%;"}
+-   Ecology:
+    -   "native"
+    -   "bush"
+    -   "beetle"
+-   Cultural significance:
+    -   "Māori"
+:::
+
+::: {.column style="width: 50%; font-size: 70%;"}
+-   Flavour profile and texture:
+    -   "peanut butter"
+    -   "gooey"
+    -   "creamy"
+    -   "slimy"
+:::
+:::
+
+## Conclusions
+
+-   Sustainability/environmental impact is a selling point for edible insects
+-   Huhu Beetle (*Prionoplus reticularis*) is widely recognised in Aotearoa
+-   Research has tended to focus on the huhu grub as a pest of timber industry
+-   There is a gap in knowledge of the biology of huhu beetles
+
+::: notes
+-   This presents an opportunity to investigate this species whilst also exploring the potential of a novel technique for identifying the geographic provenance of insects
+:::
+
+# Chapter 4: The metabolomic fingerprint of an edible insect species, *P. reticularis*, along a latitudinal gradient {.r-fit-text}
+
+## Can we use the metabolomic profile of an insect to determine which geographic location it came from?
+
+```{r map}
+#| echo: false
+
+metab_map <- leaflet::leaflet() %>%
+  leaflet::addProviderTiles(providers$Stadia.StamenWatercolor) %>% 
+  leaflet::addCircles(lng=df_metab_fieldsites$longitude, lat=df_metab_fieldsites$latitude, weight = 20, color = "purple")
+
+metab_map
+
+```
+
+::: notes
+-   collecting grubs along a latitudinal gradient
+-   Used GC-MS along with two derivatisation techniques to identify metabolites
+-   Assessed which derivatisation technique had was most effective at predicting correct location of a species
+:::
+
+## Findings (PERMANOVA)
+
+### Methyl chloroformate (MCF):
+
+-   Location, larval weight, log and log temperature were all significant.
+    -   Location only explained [12.3%]{.fragment .highlight-red} of the variation in the model
+
+### Trimethylsilyl (TMS):
+
+-   Only location was significant.
+    -   Location explained [31.1%]{.fragment .highlight-red} of the variation in the model
+
+## Ramdom Forest Classification Model
+
+-   TMS had the highest accuracy, predicting the correct location of a sample [72.2%]{.fragment .highlight-red} of the time
+-   MCF had a lower accuracy of [68.1%]{.fragment .highlight-red}
+    -   The field site of Kaingaroa had the highest error rate which impacted overall accuracy
+
+## Random Forest - MCF OOB {visibility="hidden"}
+
+![](media/c_4/mcf_rf_oob.png){width="1200"}
+
+## Random Forest - MCF biomarkers {visibility="hidden"}
+
+![](media/c_4/mcf_rf_biomark.png)
+
+## Random Forest - TMS OOB {visibility="hidden"}
+
+TMS ![](media/c_4/tms_rf_oob.png){width="1200"}
+
+## Random Forest - TMS biomarkers {visibility="hidden"}
+
+TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
+
+## Metabolite abundance - MCF
+
+![](media/c_4/mcf_abundance.png)
+
+## Metabolite abundance - TMS
+
+![](media/c_4/tms_abundance.png)
+
+## Take home points
+
+-   TMS provided the greatest accuracy
+-   Metabolomic profile can be used to determine geographic location
+    -   Proline was the metabolite with greatest relative abundance in MCF
+    -   both are known to be utilised for energy in other insects
+
+# Chapter 5: The static allometry of traits associated with fitness in *P. reticularis*
+
+## Exploring the mating system of an edible insect species
+
+-   Measured traits important in scramble competition mating systems
+    -   body size
+    -   wing size
+    -   antennal size
+    -   locomotory performance
+
+## Sexual dimorphism
+
+-   Male antennae were significantly larger than female antennae
+-   Females were significantly larger in all other traits.
+
+## Allometry
+
+| Trait           | Male | Female |
+|-----------------|:----:|:------:|
+| Antennal length | -ve  |  -ve   |
+| F9 length       |  0   |   0    |
+| Wing length     | -ve  |   0    |
+| Wing area       | -ve  |   0    |
+| Wing loading    |  0   |  -ve   |
+
+## Flight mill
+
+::: columns
+::: {.column width="33%"}
+<video data-autoplay src="media/c_5/flightmill_huhu_v1.mp4">
+
+</video>
+:::
+
+::: {.column .fragment width="33%"}
+![](media/c_5/flightmill_construction.jpg)
+:::
+
+::: {.column .fragment width="33%"}
+<video data-autoplay src="media/c_5/flightmill_huhu_v2.mp4">
+
+</video>
+:::
+:::
+
+## Flight mill
+
+::: columns
+::: {.column width="40%"}
+![](media/c_5/flightmill_huhu_staple.jpg)
+:::
+
+::: {.column width="60%"}
+![](media/c_5/flightmill_huhu_staple_close.png)
+:::
+:::
+
+## Findings
+
+![](media/c_5/flight_graphs.png){width="1200"}
+
+::: notes
+-   a glm (gamma distribution with log link) was used to assess how wing dimensions affect performance
+-   Wing loading (PW and WAR) was significant for all three measures of flight performance
+-   distance and duration had excellent fit (r2)
+-   incr. wing loading is associated with fast but inefficient flight
+-   Speed can maximise \# females male can encounter
+:::
+
+## Summary
+
+-   Sexual size dimorphism is present in this species
+-   Female biased sexual size dimorphism is likely driven by scramble competition
+-   Larger individuals do not benefit from disproportionate investment in wings or antennae
+-   Stabilising selection likely generates negative allometries (perhaps due to biomechanical restraints)
+-   Male biased antennae likely used in mate location (suggesting chemical cues are important in mate location)
+
+# Chapter 6: The antennal ultrastructure of *P. reticularis*
+
+## Antennal Ultrastructure Analysis
+
+-   Scanning electron microscopy
+-   Description of unique sensilla
+-   Further evidence of sexual dimorphism
+
+## Sexual Dimorphism in the antennae
+
+![](media/c_6/both_antennae.png){width="1200"}
+
+## Sensilla
+
+![](media/c_6/male_sens_auri.png){width="1200"}
+
+## Sensilla
+
+![](media/c_6/male_sens_fili.png){width="1200"}
+
+## Conclusion
+
+-   Thesis as starting point for the careful development of edible insects in NZ
+
+# Acknowledgements
+
+## The Ghiselin – Reiss small-male hypothesis
+
+<briefly run through this with visual aids>
