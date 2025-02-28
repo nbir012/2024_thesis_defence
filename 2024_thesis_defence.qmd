@@ -6,6 +6,7 @@ format:
     theme: serif
     logo: /media/huhu_line_transparent.png
     css: /css/logo.css
+
 ---
 
 ```{r libraries}
@@ -60,7 +61,7 @@ p1 <- df_enviro_impact_long %>%
        x = "Animal", y = "kg CO2-eq/kg protein") + 
   scale_x_discrete(limits = enviro_orderx) +
   theme_classic() +
-  theme(legend.position = "none")
+  theme(legend.position = "none", axis.text.x = element_text(size = 15)) 
 
 p2 <- df_enviro_impact_long %>%
   filter(Metric == "Land_use") %>% 
@@ -70,7 +71,7 @@ p2 <- df_enviro_impact_long %>%
        x = "Animal", y = "m2/kg protein") + 
   scale_x_discrete(limits = enviro_orderx) +
   theme_classic() +
-  theme(legend.position = "none")
+  theme(legend.position = "none", axis.text.x = element_text(size = 15))
 
 p3 <- df_enviro_impact_long %>%
   filter(Metric == "Energy_use") %>% 
@@ -80,7 +81,7 @@ p3 <- df_enviro_impact_long %>%
        x = "Animal", y = "MJ/kg protein") + 
   scale_x_discrete(limits = enviro_orderx) +
   theme_classic() +
-  theme(legend.position = "none")
+  theme(legend.position = "none", axis.text.x = element_text(size = 15))
 
 ```
 
@@ -99,6 +100,12 @@ p3 <- df_enviro_impact_long %>%
 :::
 :::
 
+::: notes
+- 9.7
+- 32 - 43%
+- Pressure on our existing food systems
+:::
+
 ## Insects as Food
 
 -   FAO suggests insect protein be used to meet demand
@@ -106,8 +113,10 @@ p3 <- df_enviro_impact_long %>%
 
 ::: notes
 -   High feed conversion efficiency
+- Utilise unconventional feed sources
 -   Incredibly diverse order of animals
 -   Grow in high densities
+
 :::
 
 ## Green House Gas Emissions
@@ -219,8 +228,6 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 ![](media/c_2/companies_marketing_companies_number.png){width="1200"}
 
 ::: notes
--   when we compare this to a count of companies that used these words
--   we see that sustainable and protein are used by every single company
 -   However there is little evidence on companies websites to suggest that they are actually sustainable
 -   most (but not all) relied on ingredients imported from Thailand or Canada which would likely impact enviro footprint
 -   this may lead to mistrust with consumers if found out
@@ -230,23 +237,29 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 
 ## Knowledge and use of insects as food
 
+::: {.incremental}
 -   620 participants
--   367 had eaten insects (59.2%)
--   471 participants were likely to eat in future (76.0%)
--   498 people could name one or more species (80.3%)
--   333 people named the huhu grub (53.7%)
--   298 people named crickets (48.1%)
+-   59.2% had eaten insects
+-   76.0% participants were likely to eat in future
+-   80.3% people could name one or more species
+-   48.1% people named crickets
+-   53.7% people named the huhu grub
+:::
 
 ::: notes
-This reflects the widely known status of huhu grubs in New Zealand The international and local recognition of crickets (e.g. cricket flour)
+- 60% eaten insect
+- 76% likely to eat in future
+- 80% could name a species
+- 48% named crickets
+- 54% named huhu grub 
 :::
 
 ## Factors which influence likelihood of eating insects (logistic regression)
 
 -   Factors influencing future likelihood:
-    -   Prior experience
-    -   Knowledge
-    -   Food neophobia score
+    -   [Prior experience]{.fragment .highlight-green}
+    -   [Existing Knowledge]{.fragment .highlight-green} (# of species named)
+    -   [Food neophobia score]{.fragment .highlight-red}
 
 ::: notes
 -   Prior experience and increasing knowledge of edible species were significant positive factors
@@ -255,15 +268,21 @@ This reflects the widely known status of huhu grubs in New Zealand The internati
 
 ## Unconscious Bias
 
-![](media/c_3/sent_analysis.png){width="1200"}
+![](media/c_3/sentiment_group.svg){width="1200"}
 
 ::: notes
 -   Asked people to list the first words or phrases that came to mind when they saw a particular menu ingredient (e.g. beef, tofu, silkworm pupae)
 -   Despite participants overall willingness to eat insects, insect ingredients had significantly lower sentiment scores in the words used to describe them.
--   becomes interesting when looking at individual ingredients
+:::
+
+## Unconscious Bias
+
+![](media/c_3/sentiment_item.svg){width="1200"}
+
+::: notes
 -   Cricket flour is actually has very positive sentiment scores
 -   huhu grubs are broadly comparable to lamb and tofu
--   words with "worm" or "pupae" in them ellicit greater disgust
+-   words with "worm" or "pupae" in them elicit greater disgust
 :::
 
 ## Words associated with cricket flour
@@ -311,9 +330,8 @@ This reflects the widely known status of huhu grubs in New Zealand The internati
 :::
 :::
 
-## Conclusions
+## Huhu beetle is well known
 
--   Sustainability/environmental impact is a selling point for edible insects
 -   Huhu Beetle (*Prionoplus reticularis*) is widely recognised in Aotearoa
 -   Research has tended to focus on the huhu grub as a pest of timber industry
 -   There is a gap in knowledge of the biology of huhu beetles
@@ -381,11 +399,11 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
 
 ![](media/c_4/mcf_abundance.png)
 
-## Metabolite abundance - TMS
+## Metabolite abundance - TMS {visibility="hidden"}
 
 ![](media/c_4/tms_abundance.png)
 
-## Take home points
+## Take home points {visibility="hidden"}
 
 -   TMS provided the greatest accuracy
 -   Metabolomic profile can be used to determine geographic location
@@ -402,6 +420,42 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
     -   antennal size
     -   locomotory performance
 
+
+## Flight mill
+
+::: columns
+::: {.column width="33%"}
+![](media/c_5/flightmill_construction.jpg)
+:::
+
+::: {.column .fragment width="33%"}
+
+:::{.r-stack}
+![](media/c_5/flightmill_huhu_staple.jpg){.fragment width="300" height="450"}
+
+![](media/c_5/flightmill_huhu_staple_close.png){.fragment width="450" height="300"}
+:::
+
+:::
+
+::: {.column .fragment width="33%"}
+<video data-autoplay src="media/c_5/flightmill_huhu_v1.mp4">
+
+</video>
+:::
+:::
+
+## Findings
+
+![](media/c_5/flight_graphs.png){width="1200"}
+
+::: notes
+-   a glm (gamma distribution with log link) was used to assess how wing dimensions affect performance
+-   Wing loading (PW and WAR) was significant for all three measures of flight performance
+-   incr. wing loading is associated with fast but inefficient flight
+-   Speed can maximise \# females male can encounter
+:::
+
 ## Sexual dimorphism
 
 -   Male antennae were significantly larger than female antennae
@@ -417,51 +471,13 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
 | Wing area       | -ve  |   0    |
 | Wing loading    |  0   |  -ve   |
 
-## Flight mill
-
-::: columns
-::: {.column width="33%"}
-<video data-autoplay src="media/c_5/flightmill_huhu_v1.mp4">
-
-</video>
-:::
-
-::: {.column .fragment width="33%"}
-![](media/c_5/flightmill_construction.jpg)
-:::
-
-::: {.column .fragment width="33%"}
-<video data-autoplay src="media/c_5/flightmill_huhu_v2.mp4">
-
-</video>
-:::
-:::
-
-## Flight mill
-
-::: columns
-::: {.column width="40%"}
-![](media/c_5/flightmill_huhu_staple.jpg)
-:::
-
-::: {.column width="60%"}
-![](media/c_5/flightmill_huhu_staple_close.png)
-:::
-:::
-
-## Findings
-
-![](media/c_5/flight_graphs.png){width="1200"}
-
 ::: notes
--   a glm (gamma distribution with log link) was used to assess how wing dimensions affect performance
--   Wing loading (PW and WAR) was significant for all three measures of flight performance
--   distance and duration had excellent fit (r2)
--   incr. wing loading is associated with fast but inefficient flight
--   Speed can maximise \# females male can encounter
+-  Negative allometry suggests that larger individuals do not benefit from disproportionate investment in wings or antennae
+- biomech could be stabilising selection
+- antenna length still appears to be important in mate location
 :::
 
-## Summary
+## Summary {visibility="hidden"}
 
 -   Sexual size dimorphism is present in this species
 -   Female biased sexual size dimorphism is likely driven by scramble competition
@@ -483,18 +499,23 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
 
 ## Sensilla
 
-![](media/c_6/male_sens_auri.png){width="1200"}
+![](media/c_6/male_sens_fili.png){width="1200"}
 
 ## Sensilla
 
-![](media/c_6/male_sens_fili.png){width="1200"}
+![](media/c_6/male_sens_auri.png){width="1200"}
 
 ## Conclusion
 
+-   There is potential for an edible insect industry in New Zealand
+-   However this needs to be tempered by previous company failures
+-   Huhu grubs are a possible candidate
 -   Thesis as starting point for the careful development of edible insects in NZ
 
 # Acknowledgements
 
-## The Ghiselin – Reiss small-male hypothesis
+![](media/acknow.png)
 
-<briefly run through this with visual aids>
+# Questions 
+
+![](media/huhuFemale.jpg)
