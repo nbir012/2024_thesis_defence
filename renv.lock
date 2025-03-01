@@ -1607,13 +1607,13 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.55",
+      "Version": "0.56",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "xfun"
       ],
-      "Hash": "96cb024d1c628148e2056918fe5f1354"
+      "Hash": "68e6032b8c16f33fab8756e40a0dca1a"
     },
     "tzdb": {
       "Package": "tzdb",
