@@ -6,7 +6,6 @@ format:
     theme: serif
     logo: /media/huhu_line_transparent.png
     css: /css/logo.css
-
 ---
 
 ```{r libraries}
@@ -29,6 +28,8 @@ library(leaflet.providers)
 #| echo: false
 
 #Dataframes
+
+load("anagotus_talk_data.RData")
 
 #environmental impact
 df_enviro_impact <- tibble(
@@ -89,7 +90,7 @@ p3 <- df_enviro_impact_long %>%
 
 ## Population Growth
 
-::: columns
+::::: columns
 ::: {.column width="45%"}
 -   By 2050, global population will increase to 9.7 billion (U.N., 2019)
 -   Estimated increase in protein consumption between 32 - 43% (Henchion et al., 2017)
@@ -98,12 +99,12 @@ p3 <- df_enviro_impact_long %>%
 ::: {.column width="55%"}
 ![](media/fao_population.png){.r-stretch}
 :::
-:::
+:::::
 
 ::: notes
-- 9.7
-- 32 - 43%
-- Pressure on our existing food systems
+-   9.7
+-   32 - 43%
+-   Pressure on our existing food systems
 :::
 
 ## Insects as Food
@@ -113,10 +114,9 @@ p3 <- df_enviro_impact_long %>%
 
 ::: notes
 -   High feed conversion efficiency
-- Utilise unconventional feed sources
+-   Utilise unconventional feed sources
 -   Incredibly diverse order of animals
 -   Grow in high densities
-
 :::
 
 ## Green House Gas Emissions
@@ -151,7 +151,7 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 
 ## Insects as Food
 
-::: columns
+::::: columns
 ::: {.column width="45%"}
 -   Several hundred million (van Huis et al., 2013)
 -   `>`1500 species of insects (van Itterbeeck & Pelozuelo, 2022)
@@ -160,7 +160,7 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 ::: {.column .r-stretch width="55%"}
 ![](media/intro_insects_country.jpg)
 :::
-:::
+:::::
 
 ::: notes
 -   Little is known of the species consumed in New Zealand
@@ -189,7 +189,7 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 -   Identified 21 insects species
 -   at least 10 endemic/native species:
 
-::: columns
+::::: columns
 ::: {.column style="width: 50%; font-size: 70%;"}
 -   *Prionoplus reticularis*, huhu grub
 -   *Aenetus virescens*, pūriri moth
@@ -205,7 +205,7 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 -   Tortricidae family - species unknown tīkopa/leaf rollers
 -   *Archichauliodes diversus*, puene
 :::
-:::
+:::::
 
 ## Findings
 
@@ -237,7 +237,7 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 
 ## Knowledge and use of insects as food
 
-::: {.incremental}
+::: incremental
 -   620 participants
 -   59.2% had eaten insects
 -   76.0% participants were likely to eat in future
@@ -247,11 +247,11 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 :::
 
 ::: notes
-- 60% eaten insect
-- 76% likely to eat in future
-- 80% could name a species
-- 48% named crickets
-- 54% named huhu grub 
+-   60% eaten insect
+-   76% likely to eat in future
+-   80% could name a species
+-   48% named crickets
+-   54% named huhu grub
 :::
 
 ## Factors which influence likelihood of eating insects (logistic regression)
@@ -287,7 +287,7 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
 
 ## Words associated with cricket flour
 
-::: columns
+::::: columns
 ::: {.column style="width: 50%; font-size: 70%;"}
 -   Positive
     -   "curious"
@@ -307,11 +307,11 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
     -   "pancake"
     -   "tortilla"
 :::
-:::
+:::::
 
 ## Words associated with huhu grubs
 
-::: columns
+::::: columns
 ::: {.column style="width: 50%; font-size: 70%;"}
 -   Ecology:
     -   "native"
@@ -328,12 +328,24 @@ Visualised from data in Oonincx & de Boer, 2012 and de Vries & de Boer, 2010
     -   "creamy"
     -   "slimy"
 :::
+:::::
+
+## Amusing media responses
+
+::: {.r-stack}
+![](media/fellowship/FB1.jpg){.fragment}
+
+![](media/fellowship/FB2.jpg){.fragment}
+
+![](media/fellowship/FB3.jpg){.fragment}
+
+![](media/fellowship/FB4.jpg){.fragment}
 :::
 
 ## Huhu beetle is well known
 
 -   Huhu Beetle (*Prionoplus reticularis*) is widely recognised in Aotearoa
--   Research has tended to focus on the huhu grub as a pest of timber industry
+-   Research has tended to focus on the huhu grub as a pest of the timber industry
 -   There is a gap in knowledge of the biology of huhu beetles
 
 ::: notes
@@ -420,30 +432,27 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
     -   antennal size
     -   locomotory performance
 
-
 ## Flight mill
 
-::: columns
+::::::: columns
 ::: {.column width="33%"}
 ![](media/c_5/flightmill_construction.jpg)
 :::
 
-::: {.column .fragment width="33%"}
-
-:::{.r-stack}
+:::: {.column .fragment width="33%"}
+::: r-stack
 ![](media/c_5/flightmill_huhu_staple.jpg){.fragment width="300" height="450"}
 
 ![](media/c_5/flightmill_huhu_staple_close.png){.fragment width="450" height="300"}
 :::
-
-:::
+::::
 
 ::: {.column .fragment width="33%"}
 <video data-autoplay src="media/c_5/flightmill_huhu_v1.mp4">
 
 </video>
 :::
-:::
+:::::::
 
 ## Findings
 
@@ -472,9 +481,9 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
 | Wing loading    |  0   |  -ve   |
 
 ::: notes
--  Negative allometry suggests that larger individuals do not benefit from disproportionate investment in wings or antennae
-- biomech could be stabilising selection
-- antenna length still appears to be important in mate location
+-   Negative allometry suggests that larger individuals do not benefit from disproportionate investment in wings or antennae
+-   biomech could be stabilising selection
+-   antenna length still appears to be important in mate location
 :::
 
 ## Summary {visibility="hidden"}
@@ -512,10 +521,187 @@ TMS biomarkers ![](media/c_4/tms_rf_biomark.png){width="1200"}
 -   Huhu grubs are a possible candidate
 -   Thesis as starting point for the careful development of edible insects in NZ
 
+
+
+# Fellowship 
+
+::: {#fig-anagotus layout-ncol="2"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/COLE_Curculionidae_Anagotus_fairburni.png/570px-COLE_Curculionidae_Anagotus_fairburni.png)
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/COLE_Curculionidae_Anagotus_turbotti.png/498px-COLE_Curculionidae_Anagotus_turbotti.png)
+
+*Anagotus fairburni* & *Anagotus turbotti* illustrated by Des Helmore, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0), via Wikimedia Commons
+:::
+
+## Introduction
+
+-   In 2019, I had a chat to Rich Leschen about taxonomy
+-   Started working on the *Anagotus* species from Manawatāwhi in my spare time
+-   in 2024, had a beer with George Perry and mentioned wanting to learn SDMs
+-   I ended up putting together a proposal for a fellowship that combined these two things
+
+## Insect Conservation in NZ
+
+::::: columns
+::: {.column width="60%"}
+-   There has long been concern around anthropogenic change and insect numbers in NZ
+-   Insect conservation received greater attention in the 1980's
+:::
+
+::: {.column width="40%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/George-Vernon-Hudson-RSNZ.jpeg/800px-George-Vernon-Hudson-RSNZ.jpeg)
+:::
+:::::
+
+::: notes
+-   there has been an awareness of a reduction in insect numbers driven by anthropogenic changes since at least the 1880 with Hudson's concern of forest burning
+-   Commander James J. Walker (1921) in his presidential address to the Entomological Society of London voiced concern for NZ invertebrates
+-   ‘the disastrous effect on all forms of life of this destruction and replacement ... (necessitate) immediate and thorough research in what still remains of the endemic animal life of New Zealand, before many of its most interesting forms are lost forever.’
+-   with an increased understanding of the need to conserve insects in the late 20th century
+:::
+
+## Insect Apocalypse
+
+::::: columns
+::: {.column width="60%"}
+-   There is an “Insect Apocalypse” narrative present in popular media
+-   Based on a small number of geographically and taxonomically limited long-term studies
+-   Saunders et al. (2020) advise caution and suggest steps required to investigate this
+:::
+
+::: {.column width="40%"}
+![](media/fellowship/media_quotes.jpg)
+:::
+:::::
+
+::: notes
+-   Saunders et al. propose Taxonomy, natural history observations, and population dynamics of insect species amongst other areas
+:::
+
+## Aotearoa
+
+-   Only 1/4 of insects described
+-   Coleoptera estimated to have 10,000 species
+-   Only 1/2 of which are described
+-   Lots of unusual species thanks to our island biogeography
+-   Frequent mentions in the literature of a paucity of taxonomists
+
+## Fellowship proposal looks at *Anagotus*
+
+-   18 described species
+-   \~ 11 undescribed species
+-   Found in Alpine, sub-alpine, lowland and off shore islands
+-   Three species are protected under the Wildlife Act (1953)
+
+::: notes
+-   One of those protected species is Anagotus fairburni
+:::
+
+##
+![](media/fellowship/anagotus_species_diversity.jpg)
+
+## Conservation hyper success/failure?
+-   _Anagotus fairburni_ was released on Mana Island
+-   2004 and 2006 releases of adults onto flax bushes on the island
+-   By 2018 the weevils had destroyed large areas of flax
+-   Put at risk important food and habitat for endangered birds and lizards
+
+::: notes
+-   This highlights the importance of understanding the ecology of these species... was a parisitoid missed on translocation
+-   Perfect opportunity to use modelling to understand ecological drivers of these systems
+:::
+
+##
+![](media/fellowship/anagotusFairburniLateralScaleBGR.jpg)
+
+## Fellowship proposal looks at *Anagotus*
+
+-   **Aim 1:** Comprehensive revision and cataloguing of the genus *Anagotus*
+
+-   **Aim 2:** Comparative analysis of *Anagotus* species
+
+-   **Aim 3:** Predicted distribution of *Anagotus* in New Zealand
+
+-   **Aim 4:** Factors leading to the range reduction of *Anagotus* in New Zealand
+
+
+## Aim 1: Revision and cataloguing of the genus
+
+-   Examine morphological traits to delineate species
+-   Construct a taxonomic key and a character matrix for cladistic analysis
+-   Work in partnership with iwi or hapū for species description
+-   Catalogue all *Anagotus* specimens and associated label data from NZAC and other collections
+
+## "An inordinate fondness for beetles (and their penises)"
+
+::::: columns
+::: {.column .fragment width="33%"}
+![](media/fellowship/anagotusNewSpeciesDorsal.jpg)
+:::
+
+::: {.column .fragment width="33%"}
+![](media/fellowship/anagotusNewSpeciesLateral.jpg)
+:::
+:::::
+
+## Aim 2: Comparative analysis of *Anagotus* species
+
+-   Field work at alpine, subalpine, lowland, and offshore island locations
+-   Measure, mark, and release individuals to determine lifespan, dispersal capability, and survival rate
+-   Employ behavioural sampling techniques to assess differences between species
+
+::: notes
+-   This will help to identify morph/behavioural traits that may be associated adaptability to ecosystems in flux
+-   Also opportunities to generate new hypotheses
+:::
+
+## 
+
+<video data-autoplay src="media/fellowship/undescribed_sp.mp4" background-video-muted="true">
+
+</video>
+
+## Aim 3: Predicted distribution of *Anagotus* in New Zealand
+
+-   Use environmental data and presence-only species data
+-   Simulate SDMs using ensemble models
+-   Interrogate models using xAI techniques
+
+::: notes
+-   This will help to identify traits that may be associated adaptability to ecosystems in flux
+-   Also opportunities to generate new hypotheses
+:::
+
+## Aim 3: Predicted distribution of *Anagotus* in New Zealand
+
+::::: columns
+::: {.column width="50%"}
+-   databased over 1000 pinned specimens in the NZAC
+-   Allows me to map out locations, last date collected etc.
+:::
+
+::: {.column width="50%"}
+ `r all_species_map`
+:::
+:::::
+
+## Aim 4: Factors leading to the range reduction of *Anagotus* in New Zealand
+
+-   Use SEPMs to simulate movement, mortality, and reproduction
+-   Build SEPMs using the R package ‘poems’
+-   Evaluate models using a pattern-oriented modelling framework
+
+::: notes
+-   Damien A. Fordham et al.  Sean Haythorne, Stuart C. Brown, Jessie C. Buettel, Barry W. Brook
+-  Used hunting and bounty dynamics to model the historic decline of the thylacine in Tasmania, Australia
+- Work with George Perry to explore what has led to range shifts in this group
+- Once found across the motu they are now pushed to alpine/off shore island habitats.
+:::
+
 # Acknowledgements
 
 ![](media/acknow.png)
 
-# Questions 
+# Questions
 
 ![](media/huhuFemale.jpg)
