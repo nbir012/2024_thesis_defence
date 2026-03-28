@@ -35,9 +35,9 @@ load("anagotus_talk_data.RData")
 df_enviro_impact <- tibble(
   Animal = c("beef", "beef", "milk", "milk", "pork", "pork", "chicken", "chicken", "mealworms", "mealworms"),
   min_max = c("a", "b", "a", "b", "a", "b", "a", "b", "meal_1", "meal_2"),
-  GHG = c(75, 170, 24, 48, 21, 53, 18, 36, 2.65, 0),
-  Land_use = c(144, 258, 33, 59, 47, 64, 42, 52, 3.56, 0),
-  Energy_use = c(177, 273, 37, 144, 95, 236, 80, 152, 33.68, 0)
+  GHG = c(75, 170, 24, 48, 21, 53, 18, 36, 14, 0),
+  Land_use = c(144, 258, 33, 59, 47, 64, 42, 52, 18, 0),
+  Energy_use = c(177, 273, 37, 144, 95, 236, 80, 152, 173, 0)
 )
 
 df_enviro_impact_long <- df_enviro_impact %>%
